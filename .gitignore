@@ -1,5 +1,9 @@
+minilibx_macos
+test_maps
+
 # Prerequisites
 *.d
+*.DS_Store
 
 # Object files
 *.o

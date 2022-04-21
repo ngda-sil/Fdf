@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 16:01:28 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/04/13 17:41:03 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/04/21 23:44:47 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ MINILIBX    = -lmlx -framework OpenGL -framework AppKit -L minilibx_macos
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
-FILES 		= fdf.c \
+FILES 		= main.c \
+			  hook.c \
+			  menu.c \
+			  image.c \
 
 # ==============================================================================
 

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:29:57 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/20 21:07:55 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:16:19 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,28 @@ void	tracer_segment(int x1, int y1, int x2, int y2, t_data *data)
 	}
 }
 
+void draw_line(t_data *data, int x1, int y1, int x2, int y2)
+{
+	double	dx;
+	double	dy;
+	int		pixel;
+	double	pixel_x;
+	double	pixel_y;
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	pixel = sqrt((dx * dx) + (dy * dy));
+	pixel_x = x1;
+	pixel_y = y1;
+	while (pixel)
+	{
+		my_mlx_pixel_put(data, pixel_x, pixel_y, 0x741b47);
+		pixel_x += dx;
+		pixel_y += dy;
+		pixel--;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	int		fd;
@@ -299,7 +321,7 @@ int	main(int ac, char **av)
 				y--;
 			}
 			x--;
-		}	*/
+		}	
 		while (x >= 0)
 		{
 			tracer_segment(10 + (x * 60), 10, 10 + (x * 60) , 10 + (y * 60), &img);
@@ -310,7 +332,8 @@ int	main(int ac, char **av)
 		{
 			tracer_segment(10 , 10 + (y * 60), 10 + (temp_x * 60), 10 + (y * 60), &img);
 			y--;
-		}
+		}*/
+		draw_line(&img, 0, 0, 26, 26);
 		mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, 0, 0);
 		mlx_loop(mlx_ptr);
 	}

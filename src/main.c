@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:18:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/22 11:28:46 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/23 18:07:48 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int ac, char **av)
 	(void) av;
 	t_fdf	*a;
 	a = malloc(sizeof(t_fdf));
+	a->map = malloc(sizeof(t_map));
+	init_map(a, av[1]);
 	a->mlx_ptr = mlx_init();
 	a->win_ptr = mlx_new_window(a->mlx_ptr, WIN_WIDTH, WIN_HEIGTH, "FDF");
 	menu(a);

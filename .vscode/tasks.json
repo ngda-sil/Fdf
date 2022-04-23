@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: clang build active file",
+			"command": "/usr/bin/clang",
+			"args": [
+				"gcc", "-Wall", "-Wextra", "-Werror", "/Users/ngda-sil/Desktop/Github/Fdf/src/main.c", 
+				"/Users/ngda-sil/Desktop/Github/Fdf/src/hook.c", "/Users/ngda-sil/Desktop/Github/Fdf/src/menu.c", 
+				"/Users/ngda-sil/Desktop/Github/Fdf/src/image.c", "/Users/ngda-sil/Desktop/Github/Fdf/src/draw.c", 
+				"/Users/ngda-sil/Desktop/Github/Fdf/src/parser.c" "/Users/ngda-sil/Desktop/Github/Fdf/Libft/libft.a",
+				 "-lmlx", "-framework", "OpenGL", "-framework" "AppKit" "-L" "/Users/ngda-sil/Desktop/Github/Fdf/minilibx_macos", "-o",
+				 "fdf"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/clang"
+		}
+	]
+}

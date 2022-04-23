@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:04:17 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 19:35:46 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/23 21:27:34 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	get_size(t_fdf *a, char *f_path)
 {
 	int 	fd;
 	char 	*line;
+	char	**tab;
 
 	fd = open(f_path, O_RDONLY);
 	a->map->x = 0;
@@ -27,7 +28,9 @@ void	get_size(t_fdf *a, char *f_path)
 		ft_putstr_fd("File empty\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	a->map->x = ft_strlen(*ft_split(line, ' '));
+	tab = ft_split(line, ' ');
+	while (tab[a->map->x])
+		a->map->x++; 
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -42,16 +45,16 @@ void	double_malloc(t_fdf *a)
 
 	i = a->map->x;
 	j = a->map->y;
-	a->map->line = malloc((j + 1) * sizeof(char*));
+	a->map->line = malloc((j + 1) * sizeof(int*));
 	if (a->map->line == NULL)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	j = 0;
-	while (a->map->line[j])
+	while (j < a->map->y)
 	{
-		a->map->line[j] = malloc((i + 1) * sizeof(char));
+		a->map->line[j] = malloc((i + 1) * sizeof(int));
 		j++;
 	}
 }
@@ -64,23 +67,39 @@ void	load_line(t_fdf *a, char *f_path)
 	char	*line;
 	char	**tab;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	fd = open(f_path, O_RDONLY);
 	line = get_next_line(fd);
 	tab = ft_split(line, ' ');
-	while (tab[i][0])
-	{
-		a->line[]
-	}
+	while (++i < a->map->x)
+		a->map->line[j][i] = ft_atoi(tab[i]);
+	j++;
 	while (j < a->map->y)
 	{
-		i++;
+		i = 0;
 		line = get_next_line(fd);
-		a->map->line[i] = *ft_split(line, ' ');
+		tab = ft_split(line, ' ');
+		while (i < a->map->x)
+		{
+			a->map->line[j][i] = ft_atoi(tab[i]);
+			i++;
+		}
 		j++;
 	}
-	
+	j = 0;
+	while (j < a->map->y)
+	{
+		i = 0;
+		while (i < a->map->x)
+		{
+			ft_putnbr_fd(a->map->line[j][i], 2);
+			write(1, " ", 1);
+			i++;
+		}
+		write(1, "\n", 1);
+		j++;
+	}
 }
 
 void	init_map(t_fdf *a, char *f_path)
@@ -88,10 +107,10 @@ void	init_map(t_fdf *a, char *f_path)
 	get_size(a, f_path);
 	double_malloc(a);
 	load_line(a, f_path);
-	int i = 0;
+	/*int i = 0;
 	while (i < 11)
 	{   
 		printf("%c \n", a->map->line[i][5]);
 		i++;
-	}
+	}*/
 }

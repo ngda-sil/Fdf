@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:50:29 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 18:31:26 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/23 20:38:01 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 typedef struct s_map
 {
-	char	**line;
-	int		x;
-	int		y;
-	int		z;
+	int	**line;
+	int	x;
+	int	y;
+	int	z;
 }				t_map;
 
 typedef struct s_fdf

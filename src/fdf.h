@@ -17,16 +17,25 @@
 # include "../Libft/incl/libft.h"
 # include <math.h>
 
-# define MENU_WIDTH 300
-# define WIN_WIDTH 1920
-# define WIN_HEIGTH 1080
+# define MENU_WIDTH 150
+# define WIN_WIDTH  1280  //1920
+# define WIN_HEIGTH 800  //1080
 
 # define EXIT_BUTTON 17
 # define ESC 53
 
+# define WHITE 0xFFFFFF
+
+typedef struct s_p
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_p;
+
 typedef struct s_map
 {
-	int	**line;
+	int	**coord;
 	int	x;
 	int	y;
 	int	z;

@@ -18,9 +18,9 @@ void	put_pixel(t_fdf *a, int x, int y, int color)
 		*(int *)&a->i_addr[(y * a->i_size_line) + (x * (a->i_bpp / 8))] = color;
 }
 
-void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
+/*void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
 {
-	int	dx;
+	int dx;
 	int dy;
 	int sx;
 	int sy;
@@ -57,4 +57,62 @@ void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
 			y1 += sy;
 		}
 	}
+}*/
+
+void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
+{
+	int dx;
+	int dy;
+	int x;
+	int y;
+	int pk;
+	int i;
+
+	i = 0;
+	dx = x2 - x1;
+	if (dx < 0)
+		dx *= -1;
+	dy = y2 - y1;
+	if (dy < 0)
+		dy  *= -1;
+	x = x1;
+	y = y1;
+	if  (dx > dy) //  m < 1
+	{
+		put_pixel(a, x, y, color);
+		pk = (2 * dy) - dx;
+		while (i < dx)
+	{
+			x++;
+			if (pk < 0)
+				pk += (2 * dy);
+			else
+			{
+				y++;
+				pk += (2 * dy) - (2 * dx);
+			}
+			put_pixel(a, x, y, color);
+			i++;
+		}
+	}
+	else // m >= 1
+	{
+		put_pixel(a, x, y, color);
+		pk = (2 * dx) - dy;
+		while (i < dy)
+		{
+			y++;
+			if (pk <  0)
+				pk += (2 * dx);
+			else
+			{
+				x++;
+				pk += (2 * dx) - (2 * dy);
+			}
+			put_pixel(a, x, y, color);
+			i++;
+		}
+	}
 }
+
+

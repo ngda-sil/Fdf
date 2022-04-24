@@ -30,7 +30,9 @@ void	get_size(t_fdf *a, char *f_path)
 	}
 	tab = ft_split(line, ' ');
 	while (tab[a->map->x])
-		a->map->x++; 
+	{
+		a->map->x++;
+	}
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -41,29 +43,24 @@ void	get_size(t_fdf *a, char *f_path)
 void	double_malloc(t_fdf *a)
 {
 	int		i;
-	int		j;
 
-	i = a->map->x;
-	j = a->map->y;
-	a->map->line = malloc((j + 1) * sizeof(int*));
-	if (a->map->line == NULL)
+	i = a->map->y;
+	a->map->coord = malloc((i + 1) * sizeof(int*));
+	if (!a->map->coord)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	j = 0;
-	while (j < a->map->y)
-	{
-		a->map->line[j] = malloc((i + 1) * sizeof(int));
-		j++;
-	}
+	i = -1;
+	while (++i < a->map->y)
+		a->map->coord[i] = malloc((a->map->x + 1) * sizeof(int));
 }
 
-void	load_line(t_fdf *a, char *f_path)
+void	load_coord(t_fdf *a, char *f_path)
 {
 	int 	fd;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 	char	*line;
 	char	**tab;
 
@@ -73,32 +70,14 @@ void	load_line(t_fdf *a, char *f_path)
 	line = get_next_line(fd);
 	tab = ft_split(line, ' ');
 	while (++i < a->map->x)
-		a->map->line[j][i] = ft_atoi(tab[i]);
-	j++;
-	while (j < a->map->y)
+		a->map->coord[j][i] = ft_atoi(tab[i]);
+	while (++j < a->map->y)
 	{
-		i = 0;
+		i = -1;
 		line = get_next_line(fd);
 		tab = ft_split(line, ' ');
-		while (i < a->map->x)
-		{
-			a->map->line[j][i] = ft_atoi(tab[i]);
-			i++;
-		}
-		j++;
-	}
-	j = 0;
-	while (j < a->map->y)
-	{
-		i = 0;
-		while (i < a->map->x)
-		{
-			ft_putnbr_fd(a->map->line[j][i], 2);
-			write(1, " ", 1);
-			i++;
-		}
-		write(1, "\n", 1);
-		j++;
+		while (++i < a->map->x)
+			a->map->coord[j][i] = ft_atoi(tab[i]);
 	}
 }
 
@@ -106,11 +85,5 @@ void	init_map(t_fdf *a, char *f_path)
 {
 	get_size(a, f_path);
 	double_malloc(a);
-	load_line(a, f_path);
-	/*int i = 0;
-	while (i < 11)
-	{   
-		printf("%c \n", a->map->line[i][5]);
-		i++;
-	}*/
+	load_coord(a, f_path);
 }

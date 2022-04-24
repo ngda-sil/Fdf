@@ -14,11 +14,11 @@
 # ------------------------------------------------------------------------------
 
 NAME		= fdf
-CC			= gcc
+CC		= gcc
 CFLAGS 		= -Wall -Wextra -Werror
 LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
-MINILIBX    = -lmlx -framework OpenGL -framework AppKit -L minilibx_macos
+MINILIBX   	 = -lmlx -framework OpenGL -framework AppKit -L minilibx_macos
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)

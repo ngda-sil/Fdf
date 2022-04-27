@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:04:17 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 21:27:34 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/26 22:37:57 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	get_size(t_fdf *a, char *f_path)
 {
-	int 	fd;
-	char 	*line;
+	int		fd;
+	char	*line;
 	char	**tab;
 
 	fd = open(f_path, O_RDONLY);
@@ -26,13 +26,13 @@ void	get_size(t_fdf *a, char *f_path)
 	if (!line)
 	{
 		ft_putstr_fd("File empty\n", 2);
+		free(a->map);
+		free(a);
 		exit(EXIT_FAILURE);
 	}
 	tab = ft_split(line, ' ');
 	while (tab[a->map->x])
-	{
 		a->map->x++;
-	}
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -45,7 +45,7 @@ void	double_malloc(t_fdf *a)
 	int		i;
 
 	i = a->map->y;
-	a->map->coord = malloc((i + 1) * sizeof(int*));
+	a->map->coord = malloc((i) * sizeof(t_p *));
 	if (!a->map->coord)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
@@ -53,14 +53,14 @@ void	double_malloc(t_fdf *a)
 	}
 	i = -1;
 	while (++i < a->map->y)
-		a->map->coord[i] = malloc((a->map->x + 1) * sizeof(int));
+		a->map->coord[i] = malloc((a->map->x) * sizeof(t_p));
 }
 
 void	load_coord(t_fdf *a, char *f_path)
 {
-	int 	fd;
-	int	i;
-	int	j;
+	int		fd;
+	int		i;
+	int		j;
 	char	*line;
 	char	**tab;
 
@@ -70,14 +70,14 @@ void	load_coord(t_fdf *a, char *f_path)
 	line = get_next_line(fd);
 	tab = ft_split(line, ' ');
 	while (++i < a->map->x)
-		a->map->coord[j][i] = ft_atoi(tab[i]);
+		a->map->coord[j][i].z = ft_atoi(tab[i]);
 	while (++j < a->map->y)
 	{
 		i = -1;
 		line = get_next_line(fd);
 		tab = ft_split(line, ' ');
 		while (++i < a->map->x)
-			a->map->coord[j][i] = ft_atoi(tab[i]);
+			a->map->coord[j][i].z = ft_atoi(tab[i]);
 	}
 }
 

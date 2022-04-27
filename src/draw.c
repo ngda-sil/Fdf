@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:39:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 16:03:53 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:08:08 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,104 +15,60 @@
 void	put_pixel(t_fdf *a, int x, int y, int color)
 {
 	if (x >= 0 && x < WIN_WIDTH && y < WIN_HEIGTH && y >= 0)
+	{
 		*(int *)&a->i_addr[(y * a->i_size_line) + (x * (a->i_bpp / 8))] = color;
+		//printf(" x %d y %d i_addr %d\n", x, y, color);
+	}
 }
 
-/*void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
+int	sign(int x)
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
+	if (x > 0)
+		return (1);
+	else if (x < 0)
+		return (-1);
+	else
+		return (0);
+}
 
-	dx = x2 - x1;
-	dy = y2 - y1;
-	sx = -1;
-	sy = -1;
-	if (dx < 0)
-		dx *= -1;
-	if (dy > 0)
-		dy *= -1;
-	if (x1 < x2)
+void	draw_line(t_p p1, t_p p2, int color, t_fdf *a)
+{
+	int	x;
+	int	y;
+	int	sx;
+	int	sy;
+	int	counter;
+	int	e;
+
+	x = abs(p2.x - p1.x);
+	y = abs(p2.y - p1.y);
+	if (p1.x < p2.x)
 		sx = 1;
-	if (y1 < y2)
+	else
+		sx = -1;
+	if (p1.y < p2.y)
 		sy = 1;
-	err = dx + dy;
-	e2 = 2 * err;
+	else
+		sy = -1;
+	if (x > y)
+		counter = x / 2;
+	else
+		counter = -(y / 2);
 	while (1)
 	{
-		put_pixel(a, x1, y1, color);
-		if (x1 == x2 && y1 == y2)
-			break;
-		if ( e2 >= dy)
+		put_pixel(a, p1.x, p1.y, color);
+		if (p1.x == p2.x && p1.y == p2.y)
+			break ;
+		e = counter;
+		if (e > -x)
 		{
-			err += dy;
-			x1 += sx;
+			counter = counter - y;
+			p1.x = p1.x + sx;
 		}
-		if ( e2 * err <= dx)
+		if (e < y)
 		{
-			err += dx;
-			y1 += sy;
-		}
-	}
-}*/
-
-void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a)
-{
-	int dx;
-	int dy;
-	int x;
-	int y;
-	int pk;
-	int i;
-
-	i = 0;
-	dx = x2 - x1;
-	if (dx < 0)
-		dx *= -1;
-	dy = y2 - y1;
-	if (dy < 0)
-		dy  *= -1;
-	x = x1;
-	y = y1;
-	if  (dx > dy) //  m < 1
-	{
-		put_pixel(a, x, y, color);
-		pk = (2 * dy) - dx;
-		while (i < dx)
-	{
-			x++;
-			if (pk < 0)
-				pk += (2 * dy);
-			else
-			{
-				y++;
-				pk += (2 * dy) - (2 * dx);
-			}
-			put_pixel(a, x, y, color);
-			i++;
-		}
-	}
-	else // m >= 1
-	{
-		put_pixel(a, x, y, color);
-		pk = (2 * dx) - dy;
-		while (i < dy)
-		{
-			y++;
-			if (pk <  0)
-				pk += (2 * dx);
-			else
-			{
-				x++;
-				pk += (2 * dx) - (2 * dy);
-			}
-			put_pixel(a, x, y, color);
-			i++;
+			counter = counter + x;
+			p1.y = p1.y + sy;
 		}
 	}
 }
-
-

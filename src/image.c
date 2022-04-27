@@ -3,54 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 16:03:38 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:04:10 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_map(t_fdf *a)
+t_p	**proj_iso(t_fdf*a)
 {
-	t_p	p0;
-	t_p	p1;
+	int	i;
+	int	j;
+	t_p	**iso;
+	int	unit;
 
-	p0.y = a->map->y - 1;
-	p1.y = a->map->y - 1;
-	while (p1.y >= 0)
+	unit = WIN_HEIGTH / (a->map->y + 10);
+	if (a->map->x > a->map->y)
+		unit = WIN_HEIGTH / (a->map->x + 10);
+	i = 0;
+	iso = (t_p **)malloc(a->map->y * sizeof(t_p));
+	while (i < a->map->y)
 	{
-		p0.x = a->map->x - 2;
- 		p1.x = a->map->x - 2;
-		while (--p1.x > -2)
+		iso[i] = (t_p *)malloc(a->map->x * sizeof(t_p));
+		j = 0;
+		while (j < a->map->x)
 		{
-			draw_line((p0.x * 30) + 10, (p0.y * 30) + 10, (p1.x * 30) + 10, (p1.y * 30) + 10, 0xFFFFFF, a);
-			//printf("x0 : %d, y0 : %d, x1 : %d, y1 : %d \n", p0.x, p0.y, p1.x, p1.y);
-			p0.x--;
+			iso[i][j].x = (WIN_HEIGTH / 2 + MENU_WIDTH) + j * cos(DEG) * unit - i * cos(DEG) * unit;
+			iso[i][j].y = 150 + j * sin(DEG) * unit + i * sin(DEG) * unit - a->map->coord[i][j].z * Z_H;
+			iso[i][j].z = a->map->coord[i][j].z;
+			j++;
 		}
-		p0.y--;
-		p1.y--;
+		i++;
 	}
-	p1.x++;
-	while (p1.x < a->map->x)
+	return (iso);
+}
+
+void	draw_map(t_fdf *a, t_p **iso)
+{
+	int	i;
+	int	j;
+
+	i = a->map->x - 1;
+	while (i > 0)
 	{
-		p0.y = 0;
- 		p1.y = 0;
-		while (++p1.y < a->map->y)
+		j = a->map->y - 1;
+		while (j > 0)
 		{
-			draw_line((p0.x * 30) + 10, (p0.y * 30) + 10, (p1.x * 30) + 10, (p1.y * 30) + 10, 0xFFFFFF, a);
-			p0.y++;
+			draw_line(iso[i][j], iso[i][j - 1], 0xFFFFFF, a);
+			draw_line(iso[i][j], iso[i - 1][j], 0xFF00FF, a);
+			j--;
 		}
-		p0.x++;
-		p1.x++;
+		i--;
+	}
+	i = 0;
+	while (i < a->map->x - 1)
+	{
+		j = 0;
+		while (j < a->map->y - 1)
+		{
+			draw_line(iso[i][j], iso[i][j + 1], 0xFFFFFF, a);
+			draw_line(iso[i][j], iso[i + 1][j], 0xFF00FF, a);
+			j++;
+		}
+		i++;
 	}
 }
+
 void	image(t_fdf *a)
 {
+	t_p	**iso;
+
 	a->img_ptr = mlx_new_image(a->mlx_ptr, WIN_WIDTH, WIN_HEIGTH);
 	a->i_addr = mlx_get_data_addr(a->img_ptr, &a->i_bpp, &a->i_size_line, &a->i_endian);
-	draw_map(a);
-	//draw_line(230, 300, 400, 600, 0xFFFFFF, a);
+	iso = proj_iso(a);
+	draw_map(a, iso);
 	mlx_put_image_to_window(a->mlx_ptr, a->win_ptr, a->img_ptr, MENU_WIDTH, 0);
 }

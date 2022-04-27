@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:50:29 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/23 20:38:01 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:04:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 # include "../Libft/incl/libft.h"
 # include <math.h>
 
-# define MENU_WIDTH 150
-# define WIN_WIDTH  1280  //1920
-# define WIN_HEIGTH 800  //1080
+# define MENU_WIDTH 300
+# define WIN_WIDTH  1920 // 1280
+# define WIN_HEIGTH 1080 // 800
+# define DEG 0.5239877
+# define Z_H 10
 
 # define EXIT_BUTTON 17
 # define ESC 53
@@ -35,7 +37,7 @@ typedef struct s_p
 
 typedef struct s_map
 {
-	int	**coord;
+	t_p	**coord;
 	int	x;
 	int	y;
 	int	z;
@@ -57,7 +59,7 @@ void	deal_hook(t_fdf *a);
 void	menu(t_fdf *a);
 void	image(t_fdf *a);
 void	put_pixel(t_fdf *a, int x, int y, int color);
-void	draw_line(int x1, int y1, int x2, int y2, int color, t_fdf *a);
-void 	init_map(t_fdf *a, char *f_path);
+void	draw_line(t_p p1, t_p p2, int color, t_fdf *a);
+void	init_map(t_fdf *a, char *f_path);
 
 #endif

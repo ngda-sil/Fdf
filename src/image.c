@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/04/27 16:04:10 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:00:22 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	draw_map(t_fdf *a, t_p **iso)
 	int	i;
 	int	j;
 
-	i = a->map->x - 1;
+	i = a->map->y - 1;
 	while (i > 0)
 	{
-		j = a->map->y - 1;
+		j = a->map->x - 1;
 		while (j > 0)
 		{
 			draw_line(iso[i][j], iso[i][j - 1], 0xFFFFFF, a);
@@ -58,10 +58,10 @@ void	draw_map(t_fdf *a, t_p **iso)
 		i--;
 	}
 	i = 0;
-	while (i < a->map->x - 1)
+	while (i < a->map->y - 1)
 	{
 		j = 0;
-		while (j < a->map->y - 1)
+		while (j < a->map->x - 1)
 		{
 			draw_line(iso[i][j], iso[i][j + 1], 0xFFFFFF, a);
 			draw_line(iso[i][j], iso[i + 1][j], 0xFF00FF, a);

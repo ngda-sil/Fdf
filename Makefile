@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 16:01:28 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/04/22 14:05:21 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/05/03 17:23:43 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 # ------------------------------------------------------------------------------
 
 NAME		= fdf
-CC		= gcc
-CFLAGS 		= -Wall -Wextra -Werror
+CC			= gcc
+CFLAGS 		= -g3 -Wall -Wextra -Werror
 LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
 MINILIBX   	 = -lmlx -framework OpenGL -framework AppKit -L minilibx_macos

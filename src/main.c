@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:18:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/03 16:42:19 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:33:20 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	main(int ac, char **av)
 {
-	(void) ac;
-	
 	t_fdf	*a;
 
+	if (ac != 2)
+	{
+		ft_putstr_fd("error nb args\n", 2);
+		return (0);
+	}
 	a = malloc(sizeof(t_fdf));
 	a->map = malloc(sizeof(t_map));
 	init_map(a, av[1]);

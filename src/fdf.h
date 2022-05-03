@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:50:29 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/03 16:24:01 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:30:34 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 # define EXIT_BUTTON 17
 # define ESC 53
 
-# define WHITE 0xFFFFFF
+# define L_BLUE 0x81D2C7
+# define M_BLUE 0x6F9CEB
+# define D_BLUE 0xF7B267
 
 typedef struct s_p
 {
@@ -34,6 +36,16 @@ typedef struct s_p
 	int	y;
 	int	z;
 }	t_p;
+
+typedef struct s_draw
+{
+	int	x;
+	int	y;
+	int	sx;
+	int	sy;
+	int	counter;
+	int	e;
+}	t_draw;
 
 typedef struct s_map
 {
@@ -59,7 +71,7 @@ void	deal_hook(t_fdf *a);
 void	menu(t_fdf *a);
 void	image(t_fdf *a);
 void	put_pixel(t_fdf *a, int x, int y, int color);
-void	draw_line(t_p p1, t_p p2, int color, t_fdf *a);
+void	draw_line(t_p p1, t_p p2, t_fdf *a);
 void	init_map(t_fdf *a, char *f_path);
 
 #endif

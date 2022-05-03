@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:39:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/03 16:25:00 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:27:14 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,51 @@ int	sign(int x)
 		return (0);
 }
 
-void	draw_line(t_p p1, t_p p2, int color, t_fdf *a)
+int	ft_abs(int x)
 {
-	int	x;
-	int	y;
-	int	sx;
-	int	sy;
-	int	counter;
-	int	e;
+	if (x < 0)
+		x *= -1;
+	return (x);
+}
 
-	x = abs(p2.x - p1.x);
-	y = abs(p2.y - p1.y);
+void	init_s_and_counter(t_draw *d, t_p p1, t_p p2)
+{
 	if (p1.x < p2.x)
-		sx = 1;
+		d->sx = 1;
 	else
-		sx = -1;
+		d->sx = -1;
 	if (p1.y < p2.y)
-		sy = 1;
+		d->sy = 1;
 	else
-		sy = -1;
-	if (x > y)
-		counter = x / 2;
+		d->sy = -1;
+	if (d->x > d->y)
+		d->counter = d->x / 2;
 	else
-		counter = -(y / 2);
+		d->counter = -(d->y / 2);
+}
+
+void	draw_line(t_p p1, t_p p2, t_fdf *a)
+{
+	t_draw	d;
+
+	d.x = abs(p2.x - p1.x);
+	d.y = abs(p2.y - p1.y);
+	init_s_and_counter(&d, p1, p2);
 	while (1)
 	{
-		put_pixel(a, p1.x, p1.y, color);
+		put_pixel(a, p1.x, p1.y, L_BLUE);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
-		e = counter;
-		if (e > -x)
+		d.e = d.counter;
+		if (d.e > d.x * -1)
 		{
-			counter = counter - y;
-			p1.x = p1.x + sx;
+			d.counter -= d.y;
+			p1.x += d.sx;
 		}
-		if (e < y)
+		if (d.e < d.y)
 		{
-			counter = counter + x;
-			p1.y = p1.y + sy;
+			d.counter += d.x;
+			p1.y += d.sy;
 		}
 	}
 }

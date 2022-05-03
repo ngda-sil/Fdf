@@ -15,10 +15,7 @@
 void	put_pixel(t_fdf *a, int x, int y, int color)
 {
 	if (x >= 0 && x < WIN_WIDTH && y < WIN_HEIGTH && y >= 0)
-	{
 		*(int *)&a->i_addr[(y * a->i_size_line) + (x * (a->i_bpp / 8))] = color;
-		//printf(" x %d y %d i_addr %d\n", x, y, color);
-	}
 }
 
 int	sign(int x)

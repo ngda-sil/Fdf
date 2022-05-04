@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:50:29 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/03 20:30:34 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/04 19:37:03 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_draw
 typedef struct s_map
 {
 	t_p	**coord;
+	t_p	**iso;
 	int	x;
 	int	y;
 	int	z;
@@ -64,7 +65,7 @@ typedef struct s_fdf
 	int		i_bpp;
 	int		i_size_line;
 	int		i_endian;
-	t_map	*map;
+	t_map	map;
 }				t_fdf;
 
 void	deal_hook(t_fdf *a);
@@ -73,5 +74,8 @@ void	image(t_fdf *a);
 void	put_pixel(t_fdf *a, int x, int y, int color);
 void	draw_line(t_p p1, t_p p2, t_fdf *a);
 void	init_map(t_fdf *a, char *f_path);
+void	ft_exit_simple(char *s);
+void	ft_exit_free(char *s, t_fdf *a);
+void	ft_double_free_tp(t_p **coord);
 
 #endif

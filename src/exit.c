@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 20:04:28 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/04 19:37:17 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/05/04 18:11:38 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/05/04 19:37:05 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	deal_key(int key, t_fdf *a)
+void	ft_double_free_tp(t_p **coord)
 {
-	if (key == ESC)
+	int	i;
+
+	i = 0;
+	while (coord[i])
 	{
-		mlx_destroy_window(a->mlx_ptr, a->win_ptr);
-		if (a->map.coord)
-			ft_double_free_tp(a->map.coord);
-		if (a->map.iso)
-			ft_double_free_tp(a->map.iso);
-		exit(EXIT_SUCCESS);
+		free(coord[i++]);
 	}
-	return (0);
+	free(coord);
 }
 
-int	exit_button(t_fdf *a)
+void	ft_exit_simple(char *s)
 {
-	mlx_destroy_window(a->mlx_ptr, a->win_ptr);
+	ft_putstr_fd(s, 2);
+	exit (EXIT_FAILURE);
+}
+
+void	ft_exit_free(char *s, t_fdf *a)
+{
 	if (a->map.coord)
 		ft_double_free_tp(a->map.coord);
 	if (a->map.iso)
 		ft_double_free_tp(a->map.iso);
-	exit(EXIT_SUCCESS);
-}
-
-void	deal_hook(t_fdf *a)
-{
-	mlx_hook(a->win_ptr, EXIT_BUTTON, 0, exit_button, a);
-	mlx_key_hook(a->win_ptr, deal_key, a);
-	mlx_loop(a->mlx_ptr);
+	ft_putstr_fd(s, 2);
+	exit (EXIT_FAILURE);
 }

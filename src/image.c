@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/04 19:37:10 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:00:02 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@ void	proj_iso(t_fdf *a)
 	int	j;
 	int	unit;
 
-	unit = WIN_HEIGTH / (a->map.y + 10);
-	if (a->map.x > a->map.y)
-		unit = WIN_HEIGTH / (a->map.x + 10);
+	unit = (WIN_WIDTH) / (a->map.x + 30);
 	i = -1;
-	a->map.iso = (t_p **)malloc(a->map.y * sizeof(t_p));
+	a->map.iso = ft_calloc(a->map.y + 1, sizeof(t_p));
 	if (!a->map.iso)
 		ft_exit_free("Problem malloc iso 1\n", a);
 	while (++i < a->map.y)
 	{
-		a->map.iso[i] = (t_p *)malloc(a->map.x * sizeof(t_p));
+		a->map.iso[i] = ft_calloc(a->map.x + 1, sizeof(t_p));
 		if (!a->map.iso[i])
 			ft_exit_free("Problem malloc iso 2\n", a);
 		j = -1;
 		while (++j < a->map.x)
 		{
-			a->map.iso[i][j].x = (WIN_HEIGTH / 2 + MENU_WIDTH) + j * cos(DEG)
-				* unit - i * cos(DEG) * unit;
-			a->map.iso[i][j].y = 150 + j * sin(DEG) * unit + i * sin(DEG) * unit
+			a->map.iso[i][j].x = WIN_WIDTH / 2 + (j - i) * unit * cos(DEG);
+			a->map.iso[i][j].y = 80 + (j + i) * unit * sin(DEG)
 				- a->map.coord[i][j].z * Z_H;
 			a->map.iso[i][j].z = a->map.coord[i][j].z;
 		}
@@ -78,5 +75,5 @@ void	image(t_fdf *a)
 			&a->i_endian);
 	proj_iso(a);
 	draw_map(a);
-	mlx_put_image_to_window(a->mlx_ptr, a->win_ptr, a->img_ptr, MENU_WIDTH, 0);
+	mlx_put_image_to_window(a->mlx_ptr, a->win_ptr, a->img_ptr, 0, 0);
 }

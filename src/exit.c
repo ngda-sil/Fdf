@@ -6,22 +6,25 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:11:38 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/04 19:37:05 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:10:17 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_double_free_tp(t_p **coord)
+void	ft_double_free_tp(t_p **tab)
 {
 	int	i;
 
 	i = 0;
-	while (coord[i])
+	while (tab[i])
 	{
-		free(coord[i++]);
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
 	}
-	free(coord);
+	free(tab);
+	tab = NULL;
 }
 
 void	ft_exit_simple(char *s)

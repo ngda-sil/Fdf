@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:39:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/04 19:37:15 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:58:13 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	draw_line(t_p p1, t_p p2, t_fdf *a)
 {
 	t_draw	d;
 
-	d.x = abs(p2.x - p1.x);
-	d.y = abs(p2.y - p1.y);
+	d.x = ft_abs(p2.x - p1.x);
+	d.y = ft_abs(p2.y - p1.y);
 	init_s_and_counter(&d, p1, p2);
 	while (1)
 	{
-		put_pixel(a, p1.x, p1.y, L_BLUE);
+		put_pixel(a, p1.x, p1.y, BLUE);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		d.e = d.counter;

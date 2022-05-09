@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:04:28 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/04 19:37:17 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:44:37 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	deal_key(int key, t_fdf *a)
 	{
 		mlx_destroy_window(a->mlx_ptr, a->win_ptr);
 		if (a->map.coord)
-			ft_double_free_tp(a->map.coord);
+			ft_double_free_tp(a->map.coord, a);
 		if (a->map.iso)
-			ft_double_free_tp(a->map.iso);
+			ft_double_free_tp(a->map.iso, a);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
@@ -30,9 +30,9 @@ int	exit_button(t_fdf *a)
 {
 	mlx_destroy_window(a->mlx_ptr, a->win_ptr);
 	if (a->map.coord)
-		ft_double_free_tp(a->map.coord);
+		ft_double_free_tp(a->map.coord, a);
 	if (a->map.iso)
-		ft_double_free_tp(a->map.iso);
+		ft_double_free_tp(a->map.iso, a);
 	exit(EXIT_SUCCESS);
 }
 

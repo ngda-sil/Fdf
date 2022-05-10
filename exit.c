@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 19:18:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/09 17:03:07 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/05/04 18:11:38 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/05/10 15:42:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int ac, char **av)
+void	ft_double_free_tp(t_p **tab)
 {
-	t_fdf	a;
+	int	i;
 
-	if (ac != 2)
-		ft_exit_simple("Wrong number of args\n");
-	if ()
-	init_map(&a, av[1]);
-	a.mlx_ptr = mlx_init();
-	a.win_ptr = mlx_new_window(a.mlx_ptr, WIN_WIDTH, WIN_HEIGTH, "FDF");
-	image(&a);
-	deal_hook(&a);
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
+
+void	ft_exit_simple(char *s)
+{
+	ft_putstr_fd(s, 2);
+	exit (EXIT_FAILURE);
+}
+
+void	ft_exit_free(char *s, t_fdf *a)
+{
+	if (a->map.coord)
+		ft_double_free_tp(a->map.coord);
+	if (a->map.iso)
+		ft_double_free_tp(a->map.iso);
+	ft_putstr_fd(s, 2);
+	exit (EXIT_FAILURE);
 }

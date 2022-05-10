@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:50:29 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 19:42:52 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:59:26 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,21 @@
 # include "../Libft/incl/libft.h"
 # include <math.h>
 
-# define WIN_WIDTH  1920 // 1280
-# define WIN_HEIGTH 1080 // 800
-# define DEG 0.5239877
-# define Z_H 15
-
-# define EXIT_BUTTON 17
-# define ESC 53
-
 # define BLUE 0x81D2C7
+# define DEG 0.5239877
+# define WIN_HEIGTH 1080 // 800
+# define WIN_WIDTH  1920 // 1280
+
+# define DOWN 124
+# define ESC 53
+# define EXIT_BUTTON 17
+# define LEFT 126
+# define RIGHT 125
+# define SCROLL_DWN 4
+# define SCROLL_UP 5
+# define UP 123
+# define Z_DWN 78
+# define Z_UP 69
 
 typedef struct s_p
 {
@@ -42,7 +48,6 @@ typedef struct s_draw
 	int	sy;
 	int	counter;
 	int	e;
-	int	color;
 }	t_draw;
 
 typedef struct s_map
@@ -71,15 +76,11 @@ typedef struct s_fdf
 }				t_fdf;
 
 void	deal_hook(t_fdf *a);
-void	menu(t_fdf *a);
-void	image(t_fdf *a);
-void	put_pixel(t_fdf *a, int x, int y, int color);
 void	draw_line(t_p p1, t_p p2, t_fdf *a);
-void	init_map(t_fdf *a, char *f_path);
-void	ft_exit_simple(char *s);
-void	ft_exit_free(char *s, t_fdf *a);
 void	ft_double_free_tp(t_p **tab);
-void	draw_map(t_fdf *a);
+void	ft_exit_free(char *s, t_fdf *a);
+void	ft_exit_simple(char *s);
 void	image(t_fdf *a);
+void	init_map(t_fdf *a, char *f_path);
 
 #endif

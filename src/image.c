@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 19:42:45 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:59:19 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	draw_map(t_fdf *a)
 
 void	image(t_fdf *a)
 {
-	mlx_clear_window(a->mlx_ptr, a->win_ptr);
 	a->img_ptr = mlx_new_image(a->mlx_ptr, WIN_WIDTH, WIN_HEIGTH);
 	a->i_addr = mlx_get_data_addr(a->img_ptr, &a->i_bpp, &a->i_size_line,
 			&a->i_endian);

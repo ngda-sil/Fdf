@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:39:00 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 19:42:58 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:59:28 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@ void	put_pixel(t_fdf *a, int x, int y, int color)
 {
 	if (x >= 0 && x < WIN_WIDTH && y < WIN_HEIGTH && y >= 0)
 		*(int *)&a->i_addr[(y * a->i_size_line) + (x * (a->i_bpp / 8))] = color;
-}
-
-int	sign(int x)
-{
-	if (x > 0)
-		return (1);
-	else if (x < 0)
-		return (-1);
-	else
-		return (0);
 }
 
 int	ft_abs(int x)

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:04:28 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 19:42:56 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:59:21 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	deal_key(int key, t_fdf *a)
 			ft_double_free_tp(a->map.iso);
 		exit(EXIT_SUCCESS);
 	}
-	if (key == 126)
+	if (key == LEFT)
 		a->map.y0 -= 20;
-	if (key == 125)
+	if (key == RIGHT)
 		a->map.y0 += 20;
-	if (key == 123)
+	if (key == UP)
 		a->map.x0 -= 20;
-	if (key == 124)
+	if (key == DOWN)
 		a->map.x0 += 20;
-	if (key == 69)
+	if (key == Z_UP)
 		a->map.z_unit += 2;
-	if (key == 78)
+	if (key == Z_DWN)
 		a->map.z_unit -= 2;
 	image(a);
 	return (0);
@@ -44,9 +44,9 @@ int	deal_mouse(int button, int x, int y, t_fdf *a)
 {
 	(void) x;
 	(void) y;
-	if (button == 5)
+	if (button == SCROLL_UP)
 		a->map.unit += 1;
-	if (button == 4 && a->map.unit > 0)
+	if (button == SCROLL_DWN && a->map.unit > 0)
 		a->map.unit -= 1;
 	image(a);
 	return (0);

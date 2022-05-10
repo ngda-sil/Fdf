@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/09 17:00:02 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:42:45 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	proj_iso(t_fdf *a)
 {
 	int	i;
 	int	j;
-	int	unit;
 
-	unit = (WIN_WIDTH) / (a->map.x + 30);
 	i = -1;
 	a->map.iso = ft_calloc(a->map.y + 1, sizeof(t_p));
 	if (!a->map.iso)
@@ -31,10 +29,10 @@ void	proj_iso(t_fdf *a)
 		j = -1;
 		while (++j < a->map.x)
 		{
-			a->map.iso[i][j].x = WIN_WIDTH / 2 + (j - i) * unit * cos(DEG);
-			a->map.iso[i][j].y = 80 + (j + i) * unit * sin(DEG)
-				- a->map.coord[i][j].z * Z_H;
 			a->map.iso[i][j].z = a->map.coord[i][j].z;
+			a->map.iso[i][j].x = a->map.x0 + (j - i) * a->map.unit * cos(DEG);
+			a->map.iso[i][j].y = a->map.y0 + (j + i) * a->map.unit * sin(DEG)
+				- a->map.iso[i][j].z * (a->map.unit + a->map.z_unit);
 		}
 	}
 }
@@ -70,6 +68,7 @@ void	draw_map(t_fdf *a)
 
 void	image(t_fdf *a)
 {
+	mlx_clear_window(a->mlx_ptr, a->win_ptr);
 	a->img_ptr = mlx_new_image(a->mlx_ptr, WIN_WIDTH, WIN_HEIGTH);
 	a->i_addr = mlx_get_data_addr(a->img_ptr, &a->i_bpp, &a->i_size_line,
 			&a->i_endian);

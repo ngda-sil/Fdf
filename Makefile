@@ -6,7 +6,7 @@
 #    By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 16:01:28 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/05/09 17:01:53 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/05/10 20:01:14 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
 FILES 		= main.c \
 			  hook.c \
-			  menu.c \
 			  image.c \
 			  draw.c \
 			  parser.c \

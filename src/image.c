@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:11:16 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 20:59:19 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:21:35 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	proj_iso(t_fdf *a)
 			a->map.iso[i][j].z = a->map.coord[i][j].z;
 			a->map.iso[i][j].x = a->map.x0 + (j - i) * a->map.unit * cos(DEG);
 			a->map.iso[i][j].y = a->map.y0 + (j + i) * a->map.unit * sin(DEG)
-				- a->map.iso[i][j].z * (a->map.unit + a->map.z_unit);
+				- a->map.iso[i][j].z * (a->map.unit * a->map.z_unit);
 		}
 	}
 }

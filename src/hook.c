@@ -6,11 +6,10 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:04:28 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 20:59:21 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:21:36 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// 5 + 4 -
 #include "fdf.h"
 
 int	deal_key(int key, t_fdf *a)
@@ -33,9 +32,9 @@ int	deal_key(int key, t_fdf *a)
 	if (key == DOWN)
 		a->map.x0 += 20;
 	if (key == Z_UP)
-		a->map.z_unit += 2;
+		a->map.z_unit += 1;
 	if (key == Z_DWN)
-		a->map.z_unit -= 2;
+		a->map.z_unit -= 1;
 	image(a);
 	return (0);
 }

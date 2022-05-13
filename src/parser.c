@@ -6,7 +6,7 @@
 /*   By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:04:17 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/05/10 20:59:24 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:21:32 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	init_units(t_fdf *a)
 	a->map.x0 = WIN_WIDTH / 2;
 	a->map.y0 = 200;
 	a->map.unit = (WIN_WIDTH) / (a->map.x + 30);
-	a->map.z_unit = 15;
+	a->map.z_unit = 5;
 }
 
 void	init_map(t_fdf *a, char *f_path)
